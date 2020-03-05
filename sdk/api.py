@@ -26,7 +26,7 @@ class TimeTreeApi():
         response = self._get('/calendars', params=include)
         return [CalenderResponse.new_from_json_dict(it) for it in response.json()['data']]
 
-    def get_calender_by_id(self, calendar_id, include=None):
+    def get_calender(self, calendar_id, include=None):
         response = self._get(
             '/calendars/{calendar_id}'.format(calendar_id=calendar_id),
             params=include
