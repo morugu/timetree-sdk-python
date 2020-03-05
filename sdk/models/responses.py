@@ -21,20 +21,20 @@ class AttributesResponse(Base):
         self.image_url = image_url
 
 
-class CalenderResponse(Base):
+class CalendarResponse(Base):
     def __init__(self, id=None, type=None, attributes=None, relationships=None, members=None):
 
-        super(CalenderResponse, self).__init__()
+        super(CalendarResponse, self).__init__()
 
         self.id = id
         self.type = type
-        self.attributes = self.get_or_new_from_json_dict(attributes, CalenderAttributesResponse)
+        self.attributes = self.get_or_new_from_json_dict(attributes, CalendarAttributesResponse)
 
 
-class CalenderAttributesResponse(Base):
+class CalendarAttributesResponse(Base):
     def __init__(self, name=None, created_at=None, description=None, image_url=None, color=None, order=None):
 
-        super(CalenderAttributesResponse, self).__init__()
+        super(CalendarAttributesResponse, self).__init__()
 
         self.name = name
         self.created_at = created_at
@@ -54,12 +54,23 @@ class RelationshipsResponse(Base):
 
 
 class LabelResponse(Base):
-    def __init__(self, id=None, type=None):
+    def __init__(self, id=None, type=None, attributes=None):
 
         super(LabelResponse, self).__init__()
 
         self.id = id
         self.type = type
+        self.attributes = attributes
+
+
+class LabelAttributesResponse(Base):
+
+    def __init__(self, name=None, color=None):
+
+        super(LabelAttributesResponse, self).__init__()
+
+        self.name = name
+        self.color = color
 
 
 class MemberResponse(Base):
