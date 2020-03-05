@@ -74,9 +74,20 @@ class LabelAttributesResponse(Base):
 
 
 class MemberResponse(Base):
-    def __init__(self, id=None, type=None):
+    def __init__(self, id=None, type=None, attributes=None):
 
         super(MemberResponse, self).__init__()
 
         self.id = id
         self.type = type
+        self.attributes = self.get_or_new_from_json_dict(attributes, MemberAttributeResponse)
+
+
+class MemberAttributeResponse(Base):
+    def __init__(self, name=None, description=None, image_url=None):
+
+        super(MemberAttributeResponse, self).__init__()
+
+        self.name = name
+        self.description = description
+        self.image_url = image_url

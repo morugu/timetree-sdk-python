@@ -4,7 +4,8 @@ from models import (
     UserResponse,
     AttributesResponse,
     CalendarResponse,
-    LabelResponse
+    LabelResponse,
+    MemberResponse
 )
 import os
 
@@ -40,6 +41,12 @@ class TimeTreeApi():
         )
         return [LabelResponse.new_from_json_dict(it) for it in response.json()['data']]
 
+    def get_calendar_members(self, calendar_id):
+        response = self._get(
+            '/calendars/{calendar_id}/members'.format(calendar_id=calendar_id)
+        )
+        return [MemberResponse.new_from_json_dict(it) for it in response.json()['data']]
+
     def _get(self, path, endpoint=None, params=None, headers=None):
         url = (endpoint or self.endpoint) + path
 
@@ -63,5 +70,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_calendar_labels(os.environ['TIME_TREE_CALENDAR_ID'])
-    print(vars(response[0]))
+    response = api.get_calendar_members(os.environ['TIME_TREE_CALENDAR_ID'])
+    print(vars(response[0].attributes))
