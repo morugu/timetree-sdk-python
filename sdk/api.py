@@ -2,7 +2,8 @@ import requests
 import json
 from models import (
     UserResponse,
-    AttributesResponse
+    AttributesResponse,
+    CalenderResponse
 )
 import os
 
@@ -19,8 +20,18 @@ class TimeTreeApi():
 
     def get_user(self):
         response = self._get('/user')
-        print(json.dumps(response.json()['data'], indent=4))
         return UserResponse.new_from_json_dict(response.json()['data'])
+
+    def get_calendars(self, include=None):
+        response = self._get('/calendars', params=include)
+        return [CalenderResponse.new_from_json_dict(it) for it in response.json()['data']]
+
+    def get_calender_by_id(self, calendar_id, include=None):
+        response = self._get(
+            '/calendars/{calendar_id}'.format(calendar_id=calendar_id),
+            params=include
+        )
+        return CalenderResponse.new_from_json_dict(response.json()['data'])
 
     def _get(self, path, endpoint=None, params=None, headers=None):
         url = (endpoint or self.endpoint) + path
@@ -45,5 +56,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_user()
-    print(response)
+    response = api.get_calendars()
+    print(response[0].attributes.name)
