@@ -5,7 +5,8 @@ from models import (
     AttributesResponse,
     CalendarResponse,
     LabelResponse,
-    MemberResponse
+    MemberResponse,
+    EventResponse
 )
 import os
 
@@ -47,6 +48,19 @@ class TimeTreeApi():
         )
         return [MemberResponse.new_from_json_dict(it) for it in response.json()['data']]
 
+    def get_event(self, calendar_id, event_id, include=None):
+        response = self._get(
+            '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id),
+            params=include
+        )
+        return EventResponse.new_from_json_dict(response.json()['data'])
+
+    def get_upcoming_events(self, calendar_id, timezone=None, days=None, include=None):
+        response = self._get(
+            '/calendars/{calendar_id}/upcoming_events'.format(calendar_id=calendar_id)
+        )
+        return [EventResponse.new_from_json_dict(it) for it in response.json()['data']]
+
     def _get(self, path, endpoint=None, params=None, headers=None):
         url = (endpoint or self.endpoint) + path
 
@@ -70,5 +84,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_calendar_members(os.environ['TIME_TREE_CALENDAR_ID'])
-    print(vars(response[0].attributes))
+    response = api.get_event(os.environ['TIME_TREE_CALENDAR_ID'], os.environ['TIME_TREE_EVENT_ID'])
+    print(response.id)

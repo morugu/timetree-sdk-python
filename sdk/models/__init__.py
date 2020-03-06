@@ -3,5 +3,6 @@ from .responses import (
     AttributesResponse,
     CalendarResponse,
     LabelResponse,
-    MemberResponse
+    MemberResponse,
+    EventResponse
 )
