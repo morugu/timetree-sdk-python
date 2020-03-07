@@ -22,13 +22,14 @@ class AttributesResponse(Base):
 
 
 class CalendarResponse(Base):
-    def __init__(self, id=None, type=None, attributes=None, relationships=None, members=None):
+    def __init__(self, id=None, type=None, attributes=None, relationships=None, members=None, included=None):
 
         super(CalendarResponse, self).__init__()
 
         self.id = id
         self.type = type
         self.attributes = self.get_or_new_from_json_dict(attributes, CalendarAttributesResponse)
+        self.relationships = self.get_or_new_from_json_dict(relationships, RelationshipsResponse)
 
 
 class CalendarAttributesResponse(Base):

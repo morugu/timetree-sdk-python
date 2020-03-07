@@ -26,13 +26,15 @@ class TimeTreeApi():
         return UserResponse.new_from_json_dict(response.json()['data'])
 
     def get_calendars(self, include=None):
-        response = self._get('/calendars', params=include)
+        params = None if include is None else {'include': include}
+        response = self._get('/calendars', params=params)
         return [CalendarResponse.new_from_json_dict(it) for it in response.json()['data']]
 
     def get_calendar(self, calendar_id, include=None):
+        params = None if include is None else {'include': include}
         response = self._get(
             '/calendars/{calendar_id}'.format(calendar_id=calendar_id),
-            params=include
+            params=params
         )
         return CalendarResponse.new_from_json_dict(response.json()['data'])
 
@@ -61,9 +63,8 @@ class TimeTreeApi():
         )
         return [EventResponse.new_from_json_dict(it) for it in response.json()['data']]
 
-    def _get(self, path, endpoint=None, params=None, headers=None):
-        url = (endpoint or self.endpoint) + path
-
+    def _get(self, path, params=None, headers=None):
+        url = self.endpoint + path
         if headers is None:
             headers = {}
         headers.update(self.headers)
@@ -84,5 +85,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_event(os.environ['TIME_TREE_CALENDAR_ID'], os.environ['TIME_TREE_EVENT_ID'])
-    print(response.id)
+    response = api.get_calendar(os.environ['TIME_TREE_CALENDAR_ID'], 'labels,members')
+    print(vars(response))
