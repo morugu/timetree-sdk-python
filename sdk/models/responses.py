@@ -22,14 +22,37 @@ class AttributesResponse(Base):
 
 
 class CalendarResponse(Base):
-    def __init__(self, id=None, type=None, attributes=None, relationships=None, members=None, included=None):
+    def __init__(self, data=None, included=None):
 
         super(CalendarResponse, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, CalendarDataResponse)
+        if included is not None:
+            self.included = [self.get_or_new_from_json_dict(it, CalendarIncludedResponse) for it in included]
+
+
+class CalendarDataResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None, relationships=None, members=None, included=None):
+
+        super(CalendarDataResponse, self).__init__()
 
         self.id = id
         self.type = type
         self.attributes = self.get_or_new_from_json_dict(attributes, CalendarAttributesResponse)
         self.relationships = self.get_or_new_from_json_dict(relationships, RelationshipsResponse)
+
+
+class CalendarIncludedResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None):
+
+        super(CalendarIncludedResponse, self).__init__()
+
+        self.id = id
+        self.type = type
+        if type == 'label':
+            self.attendees = self.get_or_new_from_json_dict(attributes, LabelAttributesResponse)
+        if type == 'user':
+            self.attendees = self.get_or_new_from_json_dict(attributes, MemberAttributesResponse)
 
 
 class CalendarAttributesResponse(Base):
@@ -81,13 +104,13 @@ class MemberResponse(Base):
 
         self.id = id
         self.type = type
-        self.attributes = self.get_or_new_from_json_dict(attributes, MemberAttributeResponse)
+        self.attributes = self.get_or_new_from_json_dict(attributes, MemberAttributesResponse)
 
 
-class MemberAttributeResponse(Base):
+class MemberAttributesResponse(Base):
     def __init__(self, name=None, description=None, image_url=None):
 
-        super(MemberAttributeResponse, self).__init__()
+        super(MemberAttributesResponse, self).__init__()
 
         self.name = name
         self.description = description
