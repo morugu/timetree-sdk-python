@@ -42,7 +42,7 @@ class TimeTreeApi():
         response = self._get(
             '/calendars/{calendar_id}/labels'.format(calendar_id=calendar_id)
         )
-        return [LabelResponse.new_from_json_dict(it) for it in response.json()['data']]
+        return LabelResponse.new_from_json_dict(response.json())
 
     def get_calendar_members(self, calendar_id):
         response = self._get(
@@ -85,5 +85,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_calendar(os.environ['TIME_TREE_CALENDAR_ID'], 'labels')
-    print(vars(response.data.attributes))
+    response = api.get_calendar_labels(os.environ['TIME_TREE_CALENDAR_ID'])
+    print(vars(response.data[0].attributes))

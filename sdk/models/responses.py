@@ -78,13 +78,20 @@ class RelationshipsResponse(Base):
 
 
 class LabelResponse(Base):
-    def __init__(self, id=None, type=None, attributes=None):
+    def __init__(self, data=None):
 
         super(LabelResponse, self).__init__()
+        self.data = [self.get_or_new_from_json_dict(it, LabelDataResponse) for it in data]
+
+
+class LabelDataResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None):
+
+        super(LabelDataResponse, self).__init__()
 
         self.id = id
         self.type = type
-        self.attributes = attributes
+        self.attributes = self.get_or_new_from_json_dict(attributes, LabelAttributesResponse)
 
 
 class LabelAttributesResponse(Base):
