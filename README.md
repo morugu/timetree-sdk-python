@@ -10,7 +10,7 @@ $ pip install timetree-sdk
 
 # Usage
 
-```
+```python
 from timetree_sdk import TimeTreeApi
 
 api = TimeTreeApi('TIME_TREE_API_ACCESS_TOKEN')
@@ -42,10 +42,10 @@ print(calendar.data.attributes.name) # output your calendar name
 
 ## Todo
 
-- [ ] create event
-- [ ] update event
-- [ ] delete event
-- [ ] create comment to event
+- create event
+- update event
+- delete event
+- create comment to event
 
 # Documentation
 
