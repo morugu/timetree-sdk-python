@@ -55,13 +55,20 @@ class TimeTreeApi():
             '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id),
             params=include
         )
-        return EventResponse.new_from_json_dict(response.json()['data'])
+        return EventResponse.new_from_json_dict(response.json())
 
     def get_upcoming_events(self, calendar_id, timezone=None, days=None, include=None):
         response = self._get(
             '/calendars/{calendar_id}/upcoming_events'.format(calendar_id=calendar_id)
         )
-        return [EventResponse.new_from_json_dict(it) for it in response.json()['data']]
+        return EventResponse.new_from_json_dict(response.json())
+
+    def crete_event(self, calendar_id, event):
+        response = self._post(
+            ' /calendars/{calendar_id}/events'.format(calendar_id=calendar_id),
+            data=event.as_json_string()
+        )
+        print(response)
 
     def _get(self, path, params=None, headers=None):
         url = self.endpoint + path

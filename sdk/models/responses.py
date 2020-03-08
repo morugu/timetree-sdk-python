@@ -133,9 +133,20 @@ class MemberAttributesResponse(Base):
 
 
 class EventResponse(Base):
-    def __init__(self, id=None, type=None, attributes=None, relationships=None):
+    def __init__(self, data=None):
 
         super(EventResponse, self).__init__()
+
+        if isinstance(data, list):
+            self.data = [self.get_or_new_from_json_dict(it, EventDataResponse) for it in data]
+        else:
+            self.data = self.get_or_new_from_json_dict(data, EventDataResponse)
+
+
+class EventDataResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None, relationships=None):
+
+        super(EventDataResponse, self).__init__()
 
         self.id = id
         self.type = type
