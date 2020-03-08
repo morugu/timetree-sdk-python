@@ -48,7 +48,7 @@ class TimeTreeApi():
         response = self._get(
             '/calendars/{calendar_id}/members'.format(calendar_id=calendar_id)
         )
-        return [MemberResponse.new_from_json_dict(it) for it in response.json()['data']]
+        return MemberResponse.new_from_json_dict(response.json())
 
     def get_event(self, calendar_id, event_id, include=None):
         response = self._get(
