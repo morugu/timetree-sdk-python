@@ -63,20 +63,13 @@ class TimeTreeApi():
         )
         return EventResponse.new_from_json_dict(response.json())
 
-    def crete_event(self, calendar_id, event):
-        response = self._post(
-            ' /calendars/{calendar_id}/events'.format(calendar_id=calendar_id),
-            data=event.as_json_string()
-        )
-        print(response)
-
     def _get(self, path, params=None, headers=None):
         url = self.endpoint + path
         if headers is None:
             headers = {}
         headers.update(self.headers)
+
         response = requests.get(url, headers=headers, params=params)
-        # print(json.dumps(response.json(), indent=4, sort_keys=True))
 
         self.__check_error(response)
         return response
@@ -92,5 +85,5 @@ class TimeTreeApi():
 
 if __name__ == '__main__':
     api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_calendar_labels(os.environ['TIME_TREE_CALENDAR_ID'])
+    response = api.get_upcoming_events(os.environ['TIME_TREE_CALENDAR_ID'])
     print(vars(response.data[0].attributes))
