@@ -2,9 +2,17 @@ from .base import Base
 
 
 class UserResponse(Base):
-    def __init__(self, id=None, type=None, attributes=None):
+    def __init__(self, data=None):
 
         super(UserResponse, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, UserDataResponse)
+
+
+class UserDataResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None):
+
+        super(UserDataResponse, self).__init__()
 
         self.id = id
         self.type = type
