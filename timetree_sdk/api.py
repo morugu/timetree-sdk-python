@@ -1,6 +1,6 @@
 import requests
 import json
-from models import (
+from .models import (
     UserResponse,
     AttributesResponse,
     CalendarResponse,
@@ -8,7 +8,6 @@ from models import (
     MemberResponse,
     EventResponse
 )
-import os
 
 
 class TimeTreeApi():
@@ -81,9 +80,3 @@ class TimeTreeApi():
         else:
             print(response.headers)
             raise response.status_code
-
-
-if __name__ == '__main__':
-    api = TimeTreeApi(os.environ['TIME_TREE_API_ACCESS_TOKEN'])
-    response = api.get_upcoming_events(os.environ['TIME_TREE_CALENDAR_ID'])
-    print(vars(response.data[0].attributes))
