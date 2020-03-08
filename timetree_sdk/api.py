@@ -20,9 +20,9 @@ class TimeTreeApi():
             'Authorization': 'Bearer ' + access_token
         }
 
-    def get_user(self):
+    def get_current_user(self):
         response = self._get('/user')
-        return UserResponse.new_from_json_dict(response.json()['data'])
+        return UserResponse.new_from_json_dict(response.json())
 
     def get_calendars(self, include=None):
         params = None if include is None else {'include': include}
