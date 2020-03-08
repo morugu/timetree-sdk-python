@@ -19,7 +19,7 @@ setup(
     description='TimeTree API SDK for Python',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    keywords='TimeTree timetree time-tree',
+    keywords='TimeTree timetree time-tree api sdk',
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
