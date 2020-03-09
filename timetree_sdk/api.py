@@ -73,6 +73,20 @@ class TimeTreeApi():
         self.__check_error(response)
         return response
 
+    def _post(self, path, data=None, headers=None):
+        url = self.endpoint + path
+
+        if headers is None:
+            headers = {'Content-Type': 'application/json'}
+        headers.update(self.headers)
+
+        response = requests.post(
+            url, headers=headers, data=data
+        )
+
+        self.__check_error(response)
+        return response
+
     @staticmethod
     def __check_error(response):
         if 200 <= response.status_code < 300:
