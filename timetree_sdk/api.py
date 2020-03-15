@@ -6,7 +6,15 @@ from .models import (
     CalendarResponse,
     LabelResponse,
     MemberResponse,
-    EventResponse
+    EventResponse,
+    Event,
+    EventData,
+    EventAtributes,
+    EventRelationships,
+    EventRelationshipsLabel,
+    EventRelationshipsLabelData,
+    EventRelationshipsAttendees,
+    EventRelationshipsAttendeesData
 )
 
 
@@ -59,6 +67,13 @@ class TimeTreeApi():
     def get_upcoming_events(self, calendar_id, timezone=None, days=None, include=None):
         response = self._get(
             '/calendars/{calendar_id}/upcoming_events'.format(calendar_id=calendar_id)
+        )
+        return EventResponse.new_from_json_dict(response.json())
+
+    def create_event(self, calendar_id, event):
+        response = self._post(
+            '/calendars/{calendar_id}/events'.format(calendar_id=calendar_id),
+            data=event.as_json_string()
         )
         return EventResponse.new_from_json_dict(response.json())
 
