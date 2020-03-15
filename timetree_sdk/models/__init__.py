@@ -6,3 +6,14 @@ from .responses import (
     MemberResponse,
     EventResponse
 )
+
+from .events import (
+    Event,
+    EventData,
+    EventAtributes,
+    EventRelationships,
+    EventRelationshipsLabel,
+    EventRelationshipsLabelData,
+    EventRelationshipsAttendees,
+    EventRelationshipsAttendeesData
+)

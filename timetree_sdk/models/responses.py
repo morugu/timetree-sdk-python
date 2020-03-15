@@ -188,33 +188,57 @@ class EventRelationshipsResponse(Base):
 
         super(EventRelationshipsResponse, self).__init__()
 
-        self.creator = self.get_or_new_from_json_dict(creator['data'], EventRelationshipsCreatorResponse)
-        self.label = self.get_or_new_from_json_dict(label['data'], EventRelationshipsLabelResponse)
-        self.attendees = [self.get_or_new_from_json_dict(it, EventRelationshipsAttendeesResponse) for it in attendees['data']]
+        self.creator = self.get_or_new_from_json_dict(creator, EventRelationshipsCreatorResponse)
+        self.label = self.get_or_new_from_json_dict(label, EventRelationshipsLabelResponse)
+        self.attendees = self.get_or_new_from_json_dict(attendees, EventRelationshipsAttendeesResponse)
 
 
 class EventRelationshipsCreatorResponse(Base):
-    def __init__(self, id=None, type=None):
+    def __init__(self, data=None):
 
         super(EventRelationshipsCreatorResponse, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, EventRelationshipsCreatorDataResponse)
+
+
+class EventRelationshipsCreatorDataResponse(Base):
+    def __init__(self, id=None, type=None):
+
+        super(EventRelationshipsCreatorDataResponse, self).__init__()
 
         self.id = id
         self.type = type
 
 
 class EventRelationshipsLabelResponse(Base):
-    def __init__(self, id=None, type=None):
+    def __init__(self, data=None):
 
         super(EventRelationshipsLabelResponse, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, EventRelationshipsLabelDataResponse)
+
+
+class EventRelationshipsLabelDataResponse(Base):
+    def __init__(self, id=None, type=None):
+
+        super(EventRelationshipsLabelDataResponse, self).__init__()
 
         self.id = id
         self.type = type
 
 
 class EventRelationshipsAttendeesResponse(Base):
-    def __init__(self, id=None, type=None):
+    def __init__(self, data=None):
 
         super(EventRelationshipsAttendeesResponse, self).__init__()
+
+        self.data = [self.get_or_new_from_json_dict(it, EventRelationshipsAttendeesDataResponse) for it in data]
+
+
+class EventRelationshipsAttendeesDataResponse(Base):
+    def __init__(self, id=None, type=None):
+
+        super(EventRelationshipsAttendeesDataResponse, self).__init__()
 
         self.id = id
         self.type = type

@@ -6,7 +6,15 @@ from .models import (
     CalendarResponse,
     LabelResponse,
     MemberResponse,
-    EventResponse
+    EventResponse,
+    Event,
+    EventData,
+    EventAtributes,
+    EventRelationships,
+    EventRelationshipsLabel,
+    EventRelationshipsLabelData,
+    EventRelationshipsAttendees,
+    EventRelationshipsAttendeesData
 )
 
 
@@ -62,6 +70,13 @@ class TimeTreeApi():
         )
         return EventResponse.new_from_json_dict(response.json())
 
+    def create_event(self, calendar_id, event):
+        response = self._post(
+            '/calendars/{calendar_id}/events'.format(calendar_id=calendar_id),
+            data=event.as_json_string()
+        )
+        return EventResponse.new_from_json_dict(response.json())
+
     def _get(self, path, params=None, headers=None):
         url = self.endpoint + path
         if headers is None:
@@ -69,6 +84,20 @@ class TimeTreeApi():
         headers.update(self.headers)
 
         response = requests.get(url, headers=headers, params=params)
+
+        self.__check_error(response)
+        return response
+
+    def _post(self, path, data=None, headers=None):
+        url = self.endpoint + path
+
+        if headers is None:
+            headers = {'Content-Type': 'application/json'}
+        headers.update(self.headers)
+
+        response = requests.post(
+            url, headers=headers, data=data
+        )
 
         self.__check_error(response)
         return response
