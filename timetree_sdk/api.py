@@ -58,15 +58,21 @@ class TimeTreeApi():
         return MemberResponse.new_from_json_dict(response.json())
 
     def get_event(self, calendar_id, event_id, include=None):
+        params = None if include is None else {'include': include}
         response = self._get(
             '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id),
-            params=include
+            params=params
         )
         return EventResponse.new_from_json_dict(response.json())
 
     def get_upcoming_events(self, calendar_id, timezone=None, days=None, include=None):
+        params = {}
+        None if timezone is None else params.update({'timezone': timezone})
+        None if days is None else params.update({'days': days})
+        None if include is None else params.update({'include': include})
         response = self._get(
-            '/calendars/{calendar_id}/upcoming_events'.format(calendar_id=calendar_id)
+            '/calendars/{calendar_id}/upcoming_events'.format(calendar_id=calendar_id),
+            params=params
         )
         return EventResponse.new_from_json_dict(response.json())
 
