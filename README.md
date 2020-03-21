@@ -40,11 +40,13 @@ print(calendar.data.attributes.name) # output your calendar name
 
 - get_upcoming_events
 
+- create_event
+
+- delete_event
+
 ## Todo
 
-- create event
 - update event
-- delete event
 - create comment to event
 
 # Documentation
