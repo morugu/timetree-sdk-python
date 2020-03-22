@@ -133,5 +133,4 @@ class TimeTreeApi():
         if 200 <= response.status_code < 300:
             pass
         else:
-            print(response.headers)
-            raise response.status_code
+            raise Exception(response.json())
