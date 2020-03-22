@@ -83,6 +83,13 @@ class TimeTreeApi():
         )
         return EventResponse.new_from_json_dict(response.json())
 
+    def update_event(self, calendar_id, event_id, event):
+        response = self._put(
+            '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id),
+            data=event.as_json_string()
+        )
+        return EventResponse.new_from_json_dict(response.json())
+
     def delete_event(self, calendar_id, event_id):
         response = self._delete(
             '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id)
@@ -122,6 +129,20 @@ class TimeTreeApi():
         headers.update(self.headers)
 
         response = requests.delete(
+            url, headers=headers, data=data
+        )
+
+        self.__check_error(response)
+        return response
+
+    def _put(self, path, data=None, headers=None):
+        url = self.endpoint + path
+
+        if headers is None:
+            headers = {'Content-Type': 'application/json'}
+        headers.update(self.headers)
+
+        response = requests.put(
             url, headers=headers, data=data
         )
 
