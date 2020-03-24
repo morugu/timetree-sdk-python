@@ -242,3 +242,31 @@ class EventRelationshipsAttendeesDataResponse(Base):
 
         self.id = id
         self.type = type
+
+
+class EventCommentResponse(Base):
+    def __init__(self, data=None):
+
+        super(EventCommentResponse, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, EventCommentDataResponse)
+
+
+class EventCommentDataResponse(Base):
+    def __init__(self, id=None, type=None, attributes=None):
+
+        super(EventCommentDataResponse, self).__init__()
+
+        self.id = id
+        self.type = type
+        self.attributes = self.get_or_new_from_json_dict(attributes, EventCommentAttributesResponse)
+
+
+class EventCommentAttributesResponse(Base):
+    def __init__(self, content=None, created_at=None, updated_at=None):
+
+        super(EventCommentAttributesResponse, self).__init__()
+
+        self.content = content
+        self.created_at = created_at
+        self.updated_at = updated_at

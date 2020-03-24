@@ -4,7 +4,8 @@ from .responses import (
     CalendarResponse,
     LabelResponse,
     MemberResponse,
-    EventResponse
+    EventResponse,
+    EventCommentResponse
 )
 
 from .events import (

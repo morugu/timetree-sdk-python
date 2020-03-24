@@ -7,6 +7,7 @@ from .models import (
     LabelResponse,
     MemberResponse,
     EventResponse,
+    EventCommentResponse,
     Event,
     EventData,
     EventAtributes,
@@ -104,7 +105,7 @@ class TimeTreeApi():
             '/calendars/{calendar_id}/events/{event_id}/activities'.format(calendar_id=calendar_id, event_id=event_id),
             data=event_comment.as_json_string()
         )
-        return response.status_code
+        return EventCommentResponse.new_from_json_dict(response.json())
 
     def _get(self, path, params=None, headers=None):
         url = self.endpoint + path
