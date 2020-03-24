@@ -44,9 +44,10 @@ print(calendar.data.attributes.name) # output your calendar name
 
 - delete_event
 
-## Todo
-
 - update event
+
+## Event Comment
+
 - create comment to event
 
 # Documentation
