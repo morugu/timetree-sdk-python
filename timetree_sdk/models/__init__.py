@@ -15,5 +15,8 @@ from .events import (
     EventRelationshipsLabel,
     EventRelationshipsLabelData,
     EventRelationshipsAttendees,
-    EventRelationshipsAttendeesData
+    EventRelationshipsAttendeesData,
+    EventComment,
+    EventCommentData,
+    EventCommentAttributes
 )

@@ -78,3 +78,27 @@ class EventRelationshipsAttendeesData(Base):
 
         self.id = id
         self.type = type
+
+
+class EventComment(Base):
+    def __init__(self, data=None):
+
+        super(EventComment, self).__init__()
+
+        self.data = self.get_or_new_from_json_dict(data, EventCommentData)
+
+
+class EventCommentData(Base):
+    def __init__(self, attributes=None):
+
+        super(EventCommentData, self).__init__()
+
+        self.attributes = self.get_or_new_from_json_dict(attributes, EventCommentAttributes)
+
+
+class EventCommentAttributes(Base):
+    def __init__(self, content=None):
+
+        super(EventCommentAttributes, self).__init__()
+
+        self.content = content
