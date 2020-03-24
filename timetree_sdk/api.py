@@ -14,7 +14,10 @@ from .models import (
     EventRelationshipsLabel,
     EventRelationshipsLabelData,
     EventRelationshipsAttendees,
-    EventRelationshipsAttendeesData
+    EventRelationshipsAttendeesData,
+    EventComment,
+    EventCommentData,
+    EventCommentAttributes
 )
 
 
@@ -93,6 +96,13 @@ class TimeTreeApi():
     def delete_event(self, calendar_id, event_id):
         response = self._delete(
             '/calendars/{calendar_id}/events/{event_id}'.format(calendar_id=calendar_id, event_id=event_id)
+        )
+        return response.status_code
+
+    def create_event_comment(self, calendar_id, event_id, event_comment):
+        response = self._post(
+            '/calendars/{calendar_id}/events/{event_id}/activities'.format(calendar_id=calendar_id, event_id=event_id),
+            data=event_comment.as_json_string()
         )
         return response.status_code
 
