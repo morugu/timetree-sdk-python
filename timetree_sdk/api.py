@@ -21,7 +21,7 @@ from .models import (
     EventCommentAttributes
 )
 
-OAUTH_ENDPOINT = 'https://timetreeapp.com/oauth/'
+OAUTH_ENDPOINT = 'https://timetreeapp.com/oauth'
 
 
 class TimeTreeApi():
@@ -171,7 +171,7 @@ class TimeTreeApi():
 
     @staticmethod
     def get_oauth_authorize_url(client_id, redirect_uri, response_type='code', state=None, code_challenge=None, code_challenge_method=None):
-        url = '{endpoint}authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type={response_type}&state={state}'.format(
+        url = '{endpoint}/authorize?client_id={client_id}&redirect_uri={redirect_uri}&response_type={response_type}&state={state}'.format(
             endpoint=OAUTH_ENDPOINT, client_id=client_id, redirect_uri=redirect_uri, response_type=response_type, state=state
         )
         if code_challenge is not None:
