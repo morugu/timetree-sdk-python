@@ -41,7 +41,7 @@ class TimeTreeApi():
     def get_calendars(self, include=None):
         params = None if include is None else {'include': include}
         response = self._get('/calendars', params=params)
-        return [CalendarResponse.new_from_json_dict(it) for it in response.json()]
+        return CalendarResponse.new_from_json_dict(response.json())
 
     def get_calendar(self, calendar_id, include=None):
         params = None if include is None else {'include': include}

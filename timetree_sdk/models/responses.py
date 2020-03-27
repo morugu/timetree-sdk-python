@@ -34,7 +34,10 @@ class CalendarResponse(Base):
 
         super(CalendarResponse, self).__init__()
 
-        self.data = self.get_or_new_from_json_dict(data, CalendarDataResponse)
+        if isinstance(data, list):
+            self.data = [self.get_or_new_from_json_dict(it, CalendarDataResponse) for it in data]
+        else:
+            self.data = self.get_or_new_from_json_dict(data, CalendarDataResponse)
         if included is not None:
             self.included = [self.get_or_new_from_json_dict(it, CalendarIncludedResponse) for it in included]
 
