@@ -13,8 +13,8 @@ $ pip install timetree-sdk
 ```python
 from timetree_sdk import TimeTreeApi
 
-api = TimeTreeApi('TIME_TREE_API_ACCESS_TOKEN')
-calendar = api.get_calendar('TIME_TREE_CALENDAR_ID')
+api = TimeTreeApi('API_ACCESS_TOKEN')
+calendar = api.get_calendar('CALENDAR_ID')
 print(calendar.data.attributes.name) # calendar name
 ```
 
@@ -41,21 +41,21 @@ print(calenders.data[0].attributes.name) # first calender name
 ### get_calendar
 
 ```python
-calendar = api.get_calendar('TIME_TREE_CALENDAR_ID')
+calendar = api.get_calendar('CALENDAR_ID')
 print(calendar.data.attributes.name) # calendar name
 ```
 
 ### get_calendar_labels
 
 ```python
-labels = api.get_calendar_labels('TIME_TREE_CALENDAR_ID')
+labels = api.get_calendar_labels('CALENDAR_ID')
 print(labels.data[0].attributes.name) # first calender's label name
 ```
 
 ### get_calendar_members
 
 ```python
-members = api.get_calendar_members('TIME_TREE_CALENDAR_ID')
+members = api.get_calendar_members('CALENDAR_ID')
 print(members.data[0].attributes.name) # first calender's member name
 ```
 
