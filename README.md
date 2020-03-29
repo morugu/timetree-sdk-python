@@ -73,7 +73,19 @@ print(members.data[0].attributes.name) # first calender's member name
 
 ## Event Comment
 
-- create comment to event
+### create comment to event
+
+```python
+comment = EventComment(
+    data=EventCommentData(
+        attributes=EventCommentAttributes(
+            content='Hello, world'
+        )
+    )
+)
+event_comment = api.create_event_comment('CALENDAR_ID', 'EVENT_ID', comment)
+print(event_comment.data.attributes.content) # Hello, world
+```
 
 # Documentation
 
