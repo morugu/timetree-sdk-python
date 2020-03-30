@@ -61,9 +61,19 @@ print(members.data[0].attributes.name) # first calender's member name
 
 ## Event
 
-- get_event
+### get_event
 
-- get_upcoming_events
+```python
+event = api.get_event('CALENDAR_ID', 'EVENT_ID')
+print(event.data.attributes.title) # event title
+```
+
+### get_upcoming_events
+
+```python
+events = api.get_upcoming_events('CALENDAR_ID', 'Asia/Tokyo', 7)
+print(events.data[0].attributes.title) # most recent  event title in 7 days
+```
 
 - create_event
 
