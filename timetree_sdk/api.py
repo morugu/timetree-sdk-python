@@ -10,7 +10,7 @@ from .models import (
     EventCommentResponse,
     Event,
     EventData,
-    EventAtributes,
+    EventAttributes,
     EventRelationships,
     EventRelationshipsLabel,
     EventRelationshipsLabelData,

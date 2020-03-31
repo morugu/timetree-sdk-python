@@ -11,7 +11,7 @@ from .responses import (
 from .events import (
     Event,
     EventData,
-    EventAtributes,
+    EventAttributes,
     EventRelationships,
     EventRelationshipsLabel,
     EventRelationshipsLabelData,

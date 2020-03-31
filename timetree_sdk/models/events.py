@@ -15,14 +15,14 @@ class EventData(Base):
 
         super(EventData, self).__init__()
 
-        self.attributes = self.get_or_new_from_json_dict(attributes, EventAtributes)
+        self.attributes = self.get_or_new_from_json_dict(attributes, EventAttributes)
         self.relationships = self.get_or_new_from_json_dict(relationships, EventRelationships)
 
 
-class EventAtributes(Base):
+class EventAttributes(Base):
     def __init__(self, title=None, category=None, all_day=None, start_at=None, start_timezone=None, end_at=None, end_timezone=None, description=None, location=None, url=None, relationships=None):
 
-        super(EventAtributes, self).__init__()
+        super(EventAttributes, self).__init__()
 
         self.title = title
         self.category = category
