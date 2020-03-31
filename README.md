@@ -72,14 +72,87 @@ print(event.data.attributes.title) # event title
 
 ```python
 events = api.get_upcoming_events('CALENDAR_ID', 'Asia/Tokyo', 7)
-print(events.data[0].attributes.title) # most recent  event title in 7 days
+print(events.data[0].attributes.title) # most recent event title in 7 days
 ```
 
-- create_event
+### create_event
 
-- delete_event
+```python
+event = Event(
+    data=EventData(
+        attributes=EventAttributes(
+            title='Title',
+            category='schedule',
+            all_day=False,
+            start_at='2020-04-04T11:00:00.000Z',
+            end_at='2020-04-04T13:00:00.000Z',
+            description='Description',
+            location='Location',
+            start_timezone='Japan',
+            end_timezone='Japan'
+        ),
+        relationships=EventRelationships(
+            label=EventRelationshipsLabel(
+                data=EventRelationshipsLabelData(
+                    id='LABEL_ID',
+                    type='label'
+                )
+            ),
+            attendees=EventRelationshipsAttendees(
+                data=[EventRelationshipsAttendeesData(
+                    id='USER_ID',
+                    type='user'
+                )]
+            )
+        )
+    )
+)
+response = api.create_event('CALENDAR_ID', event)
+print(response.data.attributes.title) # Title
+```
 
-- update event
+### delete_event
+
+```python
+status_code = api.delete_event('CALENDAR_ID', 'EVENT_ID')
+print(status_code) # 204 on success
+```
+
+### update event
+
+```python
+event = Event(
+    data=EventData(
+        attributes=EventAttributes(
+            title='Updated Title',
+            category='schedule',
+            all_day=False,
+            start_at='2020-04-04T11:30:00.000Z',
+            end_at='2020-04-04T13:30:00.000Z',
+            description='Description',
+            location='Location',
+            start_timezone='Japan',
+            end_timezone='Japan'
+        ),
+        relationships=EventRelationships(
+            label=EventRelationshipsLabel(
+                data=EventRelationshipsLabelData(
+                    id='LABEL_ID',
+                    type='label'
+                )
+            ),
+            attendees=EventRelationshipsAttendees(
+                data=[EventRelationshipsAttendeesData(
+                    id='USER_ID',
+                    type='user'
+                )]
+            )
+        )
+    )
+)
+response = api.create_event('CALENDAR_ID', 'EVENT_ID', event)
+print(response.data.attributes.title) # Updated Title
+```
 
 ## Event Comment
 
