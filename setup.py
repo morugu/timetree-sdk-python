@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='timetree-sdk',
     packages=['timetree_sdk', 'timetree_sdk/models/'],
-    version='0.1.1',
+    version='0.1.2',
     license='MIT',
     install_requires=['requests'],
     author='Shoya Shiraki',
