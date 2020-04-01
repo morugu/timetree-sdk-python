@@ -20,6 +20,14 @@ print(calendar.data.attributes.name) # calendar name
 
 # API
 
+## Oauth
+
+### get_oauth_authorize_url
+
+```python
+oauth_authorize_url = TimeTreeApi.get_oauth_authorize_url('CLIENT_ID', 'REDIRECT_URI', 'RESPONSE_TYPE', 'STATE')
+```
+
 ## User
 
 ### get_current_user
