@@ -22,7 +22,7 @@ print(calendar.data.attributes.name) # calendar name
 
 ## Oauth
 
-### get_oauth_authorize_url
+### get oauth authorize url
 
 ```python
 oauth_authorize_url = TimeTreeApi.get_oauth_authorize_url('CLIENT_ID', 'REDIRECT_URI', 'RESPONSE_TYPE', 'STATE')
@@ -30,7 +30,7 @@ oauth_authorize_url = TimeTreeApi.get_oauth_authorize_url('CLIENT_ID', 'REDIRECT
 
 ## User
 
-### get_current_user
+### get current user
 
 ```python
 user = api.get_current_user()
@@ -39,28 +39,28 @@ print(user.data.attributes.name) # user name
 
 ## Calendar
 
-### get_calendars
+### get calendars
 
 ```python
 calenders = api.get_calendars()
 print(calenders.data[0].attributes.name) # first calender name
 ```
 
-### get_calendar
+### get calendar
 
 ```python
 calendar = api.get_calendar('CALENDAR_ID')
 print(calendar.data.attributes.name) # calendar name
 ```
 
-### get_calendar_labels
+### get calendar labels
 
 ```python
 labels = api.get_calendar_labels('CALENDAR_ID')
 print(labels.data[0].attributes.name) # first calender's label name
 ```
 
-### get_calendar_members
+### get calendar members
 
 ```python
 members = api.get_calendar_members('CALENDAR_ID')
@@ -69,21 +69,21 @@ print(members.data[0].attributes.name) # first calender's member name
 
 ## Event
 
-### get_event
+### get event
 
 ```python
 event = api.get_event('CALENDAR_ID', 'EVENT_ID')
 print(event.data.attributes.title) # event title
 ```
 
-### get_upcoming_events
+### get upcoming events
 
 ```python
 events = api.get_upcoming_events('CALENDAR_ID', 'Asia/Tokyo', 7)
 print(events.data[0].attributes.title) # most recent event title in 7 days
 ```
 
-### create_event
+### create event
 
 ```python
 event = Event(
@@ -117,13 +117,6 @@ event = Event(
 )
 response = api.create_event('CALENDAR_ID', event)
 print(response.data.attributes.title) # Title
-```
-
-### delete_event
-
-```python
-status_code = api.delete_event('CALENDAR_ID', 'EVENT_ID')
-print(status_code) # 204 on success
 ```
 
 ### update event
@@ -160,6 +153,13 @@ event = Event(
 )
 response = api.create_event('CALENDAR_ID', 'EVENT_ID', event)
 print(response.data.attributes.title) # Updated Title
+```
+
+### delete event
+
+```python
+status_code = api.delete_event('CALENDAR_ID', 'EVENT_ID')
+print(status_code) # 204 on success
 ```
 
 ## Event Comment
