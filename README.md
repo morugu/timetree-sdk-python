@@ -42,8 +42,8 @@ print(user.data.attributes.name) # user name
 ### get calendars
 
 ```python
-calenders = api.get_calendars()
-print(calenders.data[0].attributes.name) # first calender name
+calendars = api.get_calendars()
+print(calendars.data[0].attributes.name) # first calendar name
 ```
 
 ### get calendar
@@ -57,14 +57,14 @@ print(calendar.data.attributes.name) # calendar name
 
 ```python
 labels = api.get_calendar_labels('CALENDAR_ID')
-print(labels.data[0].attributes.name) # first calender's label name
+print(labels.data[0].attributes.name) # first calendar's label name
 ```
 
 ### get calendar members
 
 ```python
 members = api.get_calendar_members('CALENDAR_ID')
-print(members.data[0].attributes.name) # first calender's member name
+print(members.data[0].attributes.name) # first calendar's member name
 ```
 
 ## Event
