@@ -2,6 +2,16 @@
 
 [TimeTree API](https://developers.timetreeapp.com/en/docs/api) SDK for Python.
 
+# TimeTree API Termination Schedule
+
+Please be aware of the following schedule for the termination of TimeTree API:
+
+- **Discontinuation of New Application Creation: August 2, 2023 (Wednesday)**  
+From this date onwards, the creation of new applications will be discontinued. This will not impact existing applications at this stage.
+
+- **Complete Shutdown of TimeTree API: December 22, 2023 (Friday)**  
+On this date, all API endpoints will cease to be available, effectively halting all functionality of the API.
+
 # Installing
 
 ```
